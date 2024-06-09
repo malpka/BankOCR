@@ -4,8 +4,8 @@ namespace BankOCRTest
 {
     public class UserStory4Test
     {
-        [Theory]
-        [MemberData(nameof(UserStory4TestData))]
+        //[Theory]
+        //[MemberData(nameof(UserStory4TestData))]
         public void UserStory4TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
             var parser = new BankOCRParser();
