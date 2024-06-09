@@ -10,25 +10,13 @@ namespace BankOCRTest
         {
             var parser = new BankOCRParser();
             var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
-            var checksumVerificationResult = VerifyChecksum(parseResult);
+            var accountVerifier = new AccountVerifier(parseResult);
+            var checksumVerificationResult = accountVerifier.Verify();
 
             Assert.Equal(expected, checksumVerificationResult);
         }
 
-        private int CalculateChecksum(string inputData)
-        {
-            int checksum = 0;
-            for (int i = 0; i < 9; i++)
-            {
-                checksum += (9 - i) * (int)Char.GetNumericValue(inputData, i);
-            }
-            checksum = checksum % 11;
-            return checksum;
-        }
-        private bool VerifyChecksum(string inputData)
-        {
-            return CalculateChecksum(inputData) == 0;
-        }
+
 
 
         public static IEnumerable<object[]> UserStory2TestData()

@@ -24,8 +24,8 @@ namespace BankOCRTest
         [MemberData(nameof(UserStory1TestData))]
         public void UserStory1TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
-            var parser = new BankOCRParser();
-            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()), tryToFixErrOrIll: false);
+            var parser = new BankOCRParser(new ParserOptions() { TryToFixErrOrIll = false });
+            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
             Assert.Equal(expected, parseResult);
         }
 

@@ -8,7 +8,23 @@ namespace BankOCR
 {
     public class BankOCRParser
     {
-        public string Parse(string input, bool tryToFixErrOrIll = true)
+        private ParserOptions options;
+        public BankOCRParser()
+        {
+            options = new ParserOptions()
+            {
+                ReportErrAccount = false,
+                ReportIllAccount = false,
+                TryToFixErrOrIll = true
+            };
+        }
+
+        public BankOCRParser(ParserOptions options)
+        {
+            this.options = options;
+        }
+
+        public string Parse(string input)
         {
             var verificationResult = VerifyInput(input);
             if (!verificationResult)
@@ -28,7 +44,18 @@ namespace BankOCR
 
             if (result.Contains('?'))
             {
-                result += " ILL";
+                if (options.ReportIllAccount)
+                {
+                    result += " ILL";
+                }
+            }
+            else
+            {
+                var accountVerificationResult = new AccountVerifier(result).Verify();
+                if (!accountVerificationResult && options.ReportErrAccount)
+                {
+                    result += " ERR";
+                }
             }
             return result;
         }
@@ -38,7 +65,7 @@ namespace BankOCR
             if (string.IsNullOrEmpty(digit))
                 throw new BankOCRException("Digit for parsing is empty");
             digit = digit.ReplaceLineEndings("");
-            for(var i = 0; i < Digit.Digits.Length; i++)
+            for (var i = 0; i < Digit.Digits.Length; i++)
             {
                 if (Digit.Digits[i].Equals(digit))
                 {
