@@ -9,7 +9,7 @@ namespace BankOCRTest
         public void UserStory2TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
             var parser = new BankOCRParser();
-            var parseResult = parser.Parse(inputData);
+            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
             Assert.Equal(expected, parseResult);
         }
 
@@ -22,6 +22,7 @@ namespace BankOCRTest
                            ", (0 + 2 * 0 + 3 * 0 + 4 * 0 + 5 * 0 + 6 * 0 + 7 * 0 + 8 * 0 + 9 * 0) % 11 == 0 };
 
             yield return new object[] { @"
+                           
   |  |  |  |  |  |  |  |  |
   |  |  |  |  |  |  |  |  |
                            ", (1 + 2 * 1 + 3 * 1 + 4 * 1 + 5 * 1 + 6 * 1 + 7 * 1 + 8 * 1 + 9 * 1) % 11 == 0 };

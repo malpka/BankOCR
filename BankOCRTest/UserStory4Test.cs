@@ -9,7 +9,7 @@ namespace BankOCRTest
         public void UserStory4TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
             var parser = new BankOCRParser();
-            var parseResult = parser.Parse(inputData);
+            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
             Assert.Equal(expected, parseResult);
         }
 

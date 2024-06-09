@@ -7,15 +7,15 @@ namespace BankOCRTest
         [Fact]
         public void UserStory1_TestCase1_ShouldParseCorrectly()
         {
-            var inputData =
-@"
+            var inputData = @"
  _  _  _  _  _  _  _  _  _ 
 | || || || || || || || || |
-|_||_||_||_||_||_||_||_||_|";
+|_||_||_||_||_||_||_||_||_|
+                           ";
             var outputData = "000000000";
 
             var parser = new BankOCRParser();
-            var parseResult = parser.Parse(inputData);
+            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
 
             Assert.Equal(parseResult, outputData);
         }
@@ -25,7 +25,7 @@ namespace BankOCRTest
         public void UserStory1TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
             var parser = new BankOCRParser();
-            var parseResult = parser.Parse(inputData, tryToFixErrOrIll: false);
+            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()), tryToFixErrOrIll: false);
             Assert.Equal(expected, parseResult);
         }
 
@@ -38,6 +38,7 @@ namespace BankOCRTest
                            ", "000000000" };
 
             yield return new object[] { @"
+                           
   |  |  |  |  |  |  |  |  |
   |  |  |  |  |  |  |  |  |
                            ", "111111111" };
