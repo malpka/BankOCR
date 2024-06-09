@@ -39,7 +39,7 @@ namespace BankOCR
                     return (char)((int)'0' + i);
                 }
             }
-            return 'c';
+            return '#';
         }
 
         private bool VerifyInput(string input)
