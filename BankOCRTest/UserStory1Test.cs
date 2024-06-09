@@ -17,7 +17,7 @@ namespace BankOCRTest
             var parser = new BankOCRParser();
             var parseResult = parser.Parse(inputData);
 
-            Assert.Equal(parseResult, outputData);              
+            Assert.Equal(parseResult, outputData);
         }
 
         [Theory]
@@ -47,49 +47,49 @@ namespace BankOCRTest
 |_ |_ |_ |_ |_ |_ |_ |_ |_ 
                            ", "222222222" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
  _  _  _  _  _  _  _  _  _ 
  _| _| _| _| _| _| _| _| _|
  _| _| _| _| _| _| _| _| _|
                            ", "333333333" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
                            
 |_||_||_||_||_||_||_||_||_|
   |  |  |  |  |  |  |  |  |
                            ", "444444444" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
  _  _  _  _  _  _  _  _  _ 
 |_ |_ |_ |_ |_ |_ |_ |_ |_ 
  _| _| _| _| _| _| _| _| _|
                            ", "555555555" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
  _  _  _  _  _  _  _  _  _ 
 |_ |_ |_ |_ |_ |_ |_ |_ |_ 
 |_||_||_||_||_||_||_||_||_|
                            ", "666666666" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
  _  _  _  _  _  _  _  _  _ 
   |  |  |  |  |  |  |  |  |
   |  |  |  |  |  |  |  |  |
                            ", "777777777" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
  _  _  _  _  _  _  _  _  _ 
 |_||_||_||_||_||_||_||_||_|
 |_||_||_||_||_||_||_||_||_|
                            ", "888888888" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
  _  _  _  _  _  _  _  _  _ 
 |_||_||_||_||_||_||_||_||_|
  _| _| _| _| _| _| _| _| _|
                            ", "999999999" };
 
-yield return new object[] { @"
+            yield return new object[] { @"
     _  _     _  _  _  _  _ 
   | _| _||_||_ |_   ||_||_|
   ||_  _|  | _||_|  ||_| _|
