@@ -8,7 +8,7 @@ namespace BankOCR
 {
     public class BankOCRParser
     {
-        public string Parse(string input)
+        public string Parse(string input, bool tryToFixErrOrIll = true)
         {
             throw new NotImplementedException();
         }
