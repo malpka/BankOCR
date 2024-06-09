@@ -14,7 +14,32 @@ namespace BankOCR
             if (!verificationResult)
                 throw new BankOCRException("Incorrect input");
 
-            throw new NotImplementedException();
+            var result = string.Empty;
+
+            var inputLines = input.Split(new string[] { Environment.NewLine }, StringSplitOptions.None).Take(3);
+            for (var i = 0; i < 9; i++)
+            {
+                var inputDigitFlatten = string.Join("", inputLines.Select(s => s.Substring(i * 3, 3)));
+                var digitParseResult = ParseDigit(inputDigitFlatten);
+                result += digitParseResult;
+            }
+
+            return result;
+        }
+
+        public char ParseDigit(string digit)
+        {
+            if (string.IsNullOrEmpty(digit))
+                throw new BankOCRException("Digit for parsing is empty");
+            digit = digit.ReplaceLineEndings("");
+            for(var i = 0; i < Digit.Digits.Length; i++)
+            {
+                if (Digit.Digits[i].Equals(digit))
+                {
+                    return (char)((int)'0' + i);
+                }
+            }
+            return 'c';
         }
 
         private bool VerifyInput(string input)
