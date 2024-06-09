@@ -9,7 +9,7 @@ namespace BankOCRTest
         public void UserStory3TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
             var parser = new BankOCRParser();
-            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
+            var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()), tryToFixErrOrIll: false);
             Assert.Equal(expected, parseResult);
         }
 
@@ -31,6 +31,24 @@ namespace BankOCRTest
   | _| _||_| _ |_   ||_||_|
   ||_  _|  | _||_|  ||_| _ 
                            ", "1234?678? ILL" };
+
+            yield return new object[] { @"
+    _  _  _  _  _  _  _  _ 
+|_||_   ||_ | ||_|| || || |
+  | _|  | _||_||_||_||_||_|
+                           ", "457508000" };
+
+            yield return new object[] { @"
+ _  _     _  _        _  _ 
+|_ |_ |_| _|  |  ||_||_||_ 
+|_||_|  | _|  |  |  | _| _|
+                           ", "664371495 ERR" };
+
+            yield return new object[] { @"
+ _  _        _  _  _  _  _ 
+|_||_   |  || ||_|| | _||_ 
+|_||_|  |  ||_||_ | | _||_|
+                           ", "86110??36 ILL" };
 
         }
 

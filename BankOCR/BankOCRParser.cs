@@ -12,7 +12,9 @@ namespace BankOCR
         {
             var verificationResult = VerifyInput(input);
             if (!verificationResult)
+            {
                 throw new BankOCRException("Incorrect input");
+            }
 
             var result = string.Empty;
 
@@ -24,6 +26,10 @@ namespace BankOCR
                 result += digitParseResult;
             }
 
+            if (result.Contains('?'))
+            {
+                result += " ILL";
+            }
             return result;
         }
 
@@ -39,7 +45,7 @@ namespace BankOCR
                     return (char)((int)'0' + i);
                 }
             }
-            return '#';
+            return '?';
         }
 
         private bool VerifyInput(string input)
