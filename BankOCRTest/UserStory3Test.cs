@@ -8,7 +8,7 @@ namespace BankOCRTest
         [MemberData(nameof(UserStory3TestData))]
         public void UserStory3TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
-            var parser = new BankOCRParser(new ParserOptions()
+            var parser = new LineParser(new ParserOptions()
             {
                 TryToFixErrOrIll = false,
                 ReportIllAccount = true,
@@ -18,6 +18,7 @@ namespace BankOCRTest
             Assert.Equal(expected, parseResult);
         }
 
+        // Remark: below every test data item contains 1 additional empty line on the beginning, so it needs to be removed before processing
         public static IEnumerable<object[]> UserStory3TestData()
         {
             yield return new object[] { @"

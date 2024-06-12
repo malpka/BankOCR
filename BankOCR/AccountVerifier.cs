@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BankOCR
+﻿namespace BankOCR
 {
     public class AccountVerifier
     {
-        public string Account { get; set; }
+        public string Account { get; private set; }
         public AccountVerifier(string account)
         {
             Account = account;
@@ -16,7 +10,7 @@ namespace BankOCR
 
         public bool Verify()
         {
-            if (string.IsNullOrEmpty(Account))
+            if (string.IsNullOrEmpty(Account) || Account.Length != 9)
             {
                 return false;
             }
@@ -33,6 +27,7 @@ namespace BankOCR
             checksum = checksum % 11;
             return checksum;
         }
+
         private bool VerifyChecksum(string inputData)
         {
             return CalculateChecksum(inputData) == 0;

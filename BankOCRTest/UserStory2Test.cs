@@ -8,7 +8,7 @@ namespace BankOCRTest
         [MemberData(nameof(UserStory2TestData))]
         public void UserStory2TestScenarios_ShouldParseCorrectly(string inputData, bool expected)
         {
-            var parser = new BankOCRParser();
+            var parser = new LineParser(new ParserOptions() { TryToFixErrOrIll = false });
             var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
             var accountVerifier = new AccountVerifier(parseResult);
             var checksumVerificationResult = accountVerifier.Verify();
@@ -16,9 +16,7 @@ namespace BankOCRTest
             Assert.Equal(expected, checksumVerificationResult);
         }
 
-
-
-
+        // Remark: below every test data item contains 1 additional empty line on the beginning, so it needs to be removed before processing
         public static IEnumerable<object[]> UserStory2TestData()
         {
             yield return new object[] { @"

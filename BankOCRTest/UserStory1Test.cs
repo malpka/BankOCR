@@ -14,7 +14,7 @@ namespace BankOCRTest
                            ";
             var outputData = "000000000";
 
-            var parser = new BankOCRParser();
+            var parser = new LineParser(new ParserOptions() { TryToFixErrOrIll = false });
             var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
 
             Assert.Equal(parseResult, outputData);
@@ -24,11 +24,12 @@ namespace BankOCRTest
         [MemberData(nameof(UserStory1TestData))]
         public void UserStory1TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
-            var parser = new BankOCRParser(new ParserOptions() { TryToFixErrOrIll = false });
+            var parser = new LineParser(new ParserOptions() { TryToFixErrOrIll = false });
             var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
             Assert.Equal(expected, parseResult);
         }
 
+        // Remark: below every test data item contains 1 additional empty line on the beginning, so it needs to be removed before processing
         public static IEnumerable<object[]> UserStory1TestData()
         {
             yield return new object[] { @"

@@ -4,15 +4,16 @@ namespace BankOCRTest
 {
     public class UserStory4Test
     {
-        //[Theory]
-        //[MemberData(nameof(UserStory4TestData))]
+        [Theory]
+        [MemberData(nameof(UserStory4TestData))]
         public void UserStory4TestScenarios_ShouldParseCorrectly(string inputData, string expected)
         {
-            var parser = new BankOCRParser();
+            var parser = new LineParser();
             var parseResult = parser.Parse(inputData.TrimStart(Environment.NewLine.ToCharArray()));
             Assert.Equal(expected, parseResult);
         }
 
+        // Remark: below every test data item contains 1 additional empty line on the beginning, so it needs to be removed before processing
         public static IEnumerable<object[]> UserStory4TestData()
         {
             yield return new object[] { @"
